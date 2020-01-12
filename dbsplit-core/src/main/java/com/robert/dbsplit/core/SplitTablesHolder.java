@@ -3,6 +3,9 @@ package com.robert.dbsplit.core;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * 容器类
+ */
 public class SplitTablesHolder {
 	private static final String DB_TABLE_SEP = "$";
 	private List<SplitTable> splitTables;

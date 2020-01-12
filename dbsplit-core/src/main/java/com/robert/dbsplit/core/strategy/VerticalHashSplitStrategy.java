@@ -1,5 +1,11 @@
-package com.robert.dbsplit.core;
+package com.robert.dbsplit.core.strategy;
 
+import com.robert.dbsplit.core.strategy.SplitStrategy;
+
+/**
+ * 垂直下标策略
+ * 数据库和表下标归零
+ */
 public class VerticalHashSplitStrategy implements SplitStrategy {
 	private int portNum;
 	private int dbNum;
@@ -39,16 +45,19 @@ public class VerticalHashSplitStrategy implements SplitStrategy {
 		this.dbNum = dbNum;
 	}
 
+	@Override
 	public int getNodeNo(Object splitKey) {
 		int hashCode = calcHashCode(splitKey);
 		return hashCode % portNum;
 	}
 
+	@Override
 	public int getDbNo(Object splitKey) {
 		int hashCode = calcHashCode(splitKey);
 		return hashCode / portNum % dbNum;
 	}
 
+	@Override
 	public int getTableNo(Object splitKey) {
 		int hashCode = calcHashCode(splitKey);
 		return hashCode / portNum / dbNum % tableNum;

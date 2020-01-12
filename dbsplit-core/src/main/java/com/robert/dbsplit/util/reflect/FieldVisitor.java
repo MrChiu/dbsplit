@@ -7,8 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class FieldVisitor<T> {
-	private static final Logger log = LoggerFactory
-			.getLogger(FieldVisitor.class);
+	private static final Logger log = LoggerFactory.getLogger(FieldVisitor.class);
 
 	private T bean;
 
@@ -16,9 +15,12 @@ public class FieldVisitor<T> {
 		this.bean = bean;
 	}
 
+	/**
+	 * 经典的访问者模式
+	 * @param fieldHandler
+	 */
 	public void visit(FieldHandler fieldHandler) {
-		List<Field> fields = ReflectionUtil.getClassEffectiveFields(bean
-				.getClass());
+		List<Field> fields = ReflectionUtil.getClassEffectiveFields(bean.getClass());
 
 		int count = 0;
 		for (int i = 0; i < fields.size(); i++) {
@@ -32,8 +34,7 @@ public class FieldVisitor<T> {
 				value = field.get(bean);
 
 				if (value != null) {
-					if (value instanceof Number
-							&& ((Number) value).doubleValue() == -1d)
+					if (value instanceof Number && ((Number) value).doubleValue() == -1d)
 						continue;
 
 					if (value instanceof List)

@@ -6,6 +6,9 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+/**
+ * 表的分片节点
+ */
 public class SplitNode {
 	private JdbcTemplate masterTemplate;
 	private List<JdbcTemplate> slaveTemplates;
@@ -15,14 +18,12 @@ public class SplitNode {
 	public SplitNode() {
 	}
 
-	public SplitNode(JdbcTemplate masterTemplate,
-			List<JdbcTemplate> slaveTemplates) {
+	public SplitNode(JdbcTemplate masterTemplate, List<JdbcTemplate> slaveTemplates) {
 		this.masterTemplate = masterTemplate;
 		this.slaveTemplates = slaveTemplates;
 	}
 
-	public SplitNode(JdbcTemplate masterTemplate,
-			JdbcTemplate... slaveTemplates) {
+	public SplitNode(JdbcTemplate masterTemplate, JdbcTemplate... slaveTemplates) {
 		this.masterTemplate = masterTemplate;
 		this.slaveTemplates = Arrays.asList(slaveTemplates);
 	}

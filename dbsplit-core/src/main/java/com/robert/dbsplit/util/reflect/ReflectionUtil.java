@@ -10,11 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 public abstract class ReflectionUtil {
-	private static final Logger log = LoggerFactory
-			.getLogger(ReflectionUtil.class);
+	private static final Logger log = LoggerFactory.getLogger(ReflectionUtil.class);
 
-	public static List<Field> getClassEffectiveFields(
-			Class<? extends Object> clazz) {
+	public static List<Field> getClassEffectiveFields(Class<? extends Object> clazz) {
 		List<Field> effectiveFields = new LinkedList<Field>();
 
 		while (clazz != null) {
@@ -22,31 +20,21 @@ public abstract class ReflectionUtil {
 			for (Field field : fields) {
 				if (!field.isAccessible()) {
 					try {
-						Method method = clazz
-								.getMethod(fieldName2GetterName(field.getName()));
+						Method method = clazz.getMethod(fieldName2GetterName(field.getName()));
 
 						if (method.getReturnType() != field.getType()) {
-							log.error(
-									"The getter for field {} may not be correct.",
-									field);
+							log.error("The getter for field {} may not be correct.", field);
 							continue;
 						}
 					} catch (NoSuchMethodException e) {
-						log.error(
-								"Fail to obtain getter method for non-accessible field {}.",
-								field);
+						log.error("Fail to obtain getter method for non-accessible field {}.", field);
 						log.error("Exception--->", e);
-
 						continue;
 					} catch (SecurityException e) {
-						log.error(
-								"Fail to obtain getter method for non-accessible field {}.",
-								field);
+						log.error("Fail to obtain getter method for non-accessible field {}.", field);
 						log.error("Exception--->", e);
-
 						continue;
 					}
-
 				}
 				effectiveFields.add(field);
 			}
@@ -111,7 +99,6 @@ public abstract class ReflectionUtil {
 				}
 			}
 		}
-
 		return null;
 	}
 }

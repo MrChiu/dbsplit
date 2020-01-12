@@ -1,7 +1,15 @@
 package com.robert.dbsplit.core;
 
+import com.robert.dbsplit.core.strategy.HorizontalHashSplitStrategy;
+import com.robert.dbsplit.core.strategy.SplitStrategy;
+import com.robert.dbsplit.core.strategy.SplitStrategyType;
+import com.robert.dbsplit.core.strategy.VerticalHashSplitStrategy;
+
 import java.util.List;
 
+/**
+ * 分片的表
+ */
 public class SplitTable {
 	private String dbNamePrefix;
 	private String tableNamePrefix;

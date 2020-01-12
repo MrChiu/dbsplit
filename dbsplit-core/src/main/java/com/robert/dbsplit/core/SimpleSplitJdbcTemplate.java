@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.robert.dbsplit.core.strategy.SplitStrategy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -11,8 +12,7 @@ import com.robert.dbsplit.core.sql.util.OrmUtil;
 import com.robert.dbsplit.core.sql.util.SqlUtil;
 import com.robert.dbsplit.core.sql.util.SqlUtil.SqlRunningBean;
 
-public class SimpleSplitJdbcTemplate extends SplitJdbcTemplate implements
-		SimpleSplitJdbcOperations {
+public class SimpleSplitJdbcTemplate extends SplitJdbcTemplate implements SimpleSplitJdbcOperations {
 
 	private enum UpdateOper {
 		INSERT, UPDATE, DELETE

@@ -1,33 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations" value="classpath:spring/dbsplit-test.properties" />
 	</bean>
 	
-	<bean id="idService" class="com.robert.vesta.service.factory.IdServiceFactoryBean"
-		init-method="init">
+	<bean id="idService" class="com.robert.vesta.service.factory.IdServiceFactoryBean" init-method="init">
 		<property name="providerType" value="PROPERTY" />
-		
 		<property name="machineId" value="${vesta.machine}" />
 	</bean>
 
 	<!-- SplitBizTemplate Entry -->
-
 	<bean name="simpleSplitJdbcTemplate" class="com.robert.dbsplit.core.SimpleSplitJdbcTemplate">
 		<property name="splitTablesHolder" ref="splitTablesHolder" />
 		<property name="readWriteSeparate" value="${dbsplit.readWriteSeparate}" />
 	</bean>
 
 	<!-- SplitTablesHolder -->
-
-	<bean name="splitTablesHolder" class="com.robert.dbsplit.core.SplitTablesHolder"
-		init-method="init">
+	<bean name="splitTablesHolder" class="com.robert.dbsplit.core.SplitTablesHolder" init-method="init">
 		<property name="splitTables">
 			<list>
 				<ref bean="splitTable" />
@@ -36,9 +28,7 @@
 	</bean>
 
 	<!-- SplitTables -->
-
-	<bean name="splitTable" class="com.robert.dbsplit.core.SplitTable"
-		init-method="init">
+	<bean name="splitTable" class="com.robert.dbsplit.core.SplitTable" init-method="init">
 
 		<property name="dbNamePrefix" value="test_db" />
 		<property name="tableNamePrefix" value="TEST_TABLE" />
@@ -55,11 +45,9 @@
 		</property>
 
 		<property name="readWriteSeparate" value="true" />
-
 	</bean>
 
 	<!-- SplitNodes -->
-
 	<bean name="splitNode1" class="com.robert.dbsplit.core.SplitNode">
 		<property name="masterTemplate" ref="masterTemplate0" />
 		<property name="slaveTemplates">
@@ -79,41 +67,35 @@
 	</bean>
 
 	<!-- Spring JdbcTemplates -->
-
 	<bean id="masterTemplate0" class="org.springframework.jdbc.core.JdbcTemplate"
-		abstract="false" lazy-init="false" autowire="default"
-		dependency-check="default">
+		abstract="false" lazy-init="false" autowire="default" dependency-check="default">
 		<property name="dataSource">
 			<ref bean="masterDatasource0" />
 		</property>
 	</bean>
 
 	<bean id="slaveTemplate00" class="org.springframework.jdbc.core.JdbcTemplate"
-		abstract="false" lazy-init="false" autowire="default"
-		dependency-check="default">
+		abstract="false" lazy-init="false" autowire="default" dependency-check="default">
 		<property name="dataSource">
 			<ref bean="slaveDatasource00" />
 		</property>
 	</bean>
 
 	<bean id="masterTemplate1" class="org.springframework.jdbc.core.JdbcTemplate"
-		abstract="false" lazy-init="false" autowire="default"
-		dependency-check="default">
+		abstract="false" lazy-init="false" autowire="default" dependency-check="default">
 		<property name="dataSource">
 			<ref bean="masterDatasource1" />
 		</property>
 	</bean>
 
 	<bean id="slaveTemplate10" class="org.springframework.jdbc.core.JdbcTemplate"
-		abstract="false" lazy-init="false" autowire="default"
-		dependency-check="default">
+		abstract="false" lazy-init="false" autowire="default" dependency-check="default">
 		<property name="dataSource">
 			<ref bean="slaveDatasource10" />
 		</property>
 	</bean>
 
 	<!-- DataSources -->
-
 	<bean name="baseDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass">
 			<value>com.mysql.jdbc.Driver</value>

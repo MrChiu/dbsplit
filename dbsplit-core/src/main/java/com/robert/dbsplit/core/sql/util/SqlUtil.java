@@ -38,17 +38,14 @@ public abstract class SqlUtil {
 	}
 
 	public static <T> SqlRunningBean generateInsertSql(T bean,
-			String databasePrefix, String tablePrefix, int databseIndex,
-			int tableIndex) {
+			String databasePrefix, String tablePrefix, int databseIndex, int tableIndex) {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("insert into ");
 
 		if (StringUtils.isEmpty(tablePrefix))
-			tablePrefix = OrmUtil.javaClassName2DbTableName(bean.getClass()
-					.getSimpleName());
+			tablePrefix = OrmUtil.javaClassName2DbTableName(bean.getClass().getSimpleName());
 
-		sb.append(getQualifiedTableName(databasePrefix, tablePrefix,
-				databseIndex, tableIndex));
+		sb.append(getQualifiedTableName(databasePrefix, tablePrefix, databseIndex, tableIndex));
 
 		sb.append("(");
 
@@ -79,19 +76,16 @@ public abstract class SqlUtil {
 		return generateInsertSql(bean, null, null, -1, -1);
 	}
 
-	public static <T> SqlRunningBean generateInsertSql(T bean,
-			String databasePrefix) {
+	public static <T> SqlRunningBean generateInsertSql(T bean, String databasePrefix) {
 		return generateInsertSql(bean, databasePrefix, null, -1, -1);
 	}
 
-	public static <T> SqlRunningBean generateInsertSql(T bean,
-			String databasePrefix, String tablePrefix) {
+	public static <T> SqlRunningBean generateInsertSql(T bean, String databasePrefix, String tablePrefix) {
 		return generateInsertSql(bean, databasePrefix, tablePrefix, -1, -1);
 	}
 
 	public static <T> SqlRunningBean generateUpdateSql(T bean,
-			String databasePrefix, String tablePrefix, int databaseIndex,
-			int tableIndex) {
+			String databasePrefix, String tablePrefix, int databaseIndex, int tableIndex) {
 		final StringBuilder sb = new StringBuilder();
 		sb.append(" update ");
 
@@ -132,19 +126,16 @@ public abstract class SqlUtil {
 		return generateUpdateSql(bean, null, null, -1, -1);
 	}
 
-	public static <T> SqlRunningBean generateUpdateSql(T bean,
-			String databasePrefix) {
+	public static <T> SqlRunningBean generateUpdateSql(T bean, String databasePrefix) {
 		return generateUpdateSql(bean, databasePrefix, null, -1, -1);
 	}
 
-	public static <T> SqlRunningBean generateUpdateSql(T bean,
-			String databasePrefix, String tablePrefix) {
+	public static <T> SqlRunningBean generateUpdateSql(T bean, String databasePrefix, String tablePrefix) {
 		return generateUpdateSql(bean, databasePrefix, tablePrefix, -1, -1);
 	}
 
 	public static <T> SqlRunningBean generateDeleteSql(long id, Class<T> clazz,
-			String databasePrefix, String tablePrefix, int databaseIndex,
-			int tableIndex) {
+			String databasePrefix, String tablePrefix, int databaseIndex, int tableIndex) {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("delete from ");
 
@@ -167,13 +158,11 @@ public abstract class SqlUtil {
 		return generateDeleteSql(id, clazz, null, null, -1, -1);
 	}
 
-	public static <T> SqlRunningBean generateDeleteSql(long id, Class<T> clazz,
-			String databasePrefix) {
+	public static <T> SqlRunningBean generateDeleteSql(long id, Class<T> clazz, String databasePrefix) {
 		return generateDeleteSql(id, clazz, databasePrefix, null, -1, -1);
 	}
 
-	public static <T> SqlRunningBean generateDeleteSql(long id, Class<T> clazz,
-			String databasePrefix, String tablePrefix) {
+	public static <T> SqlRunningBean generateDeleteSql(long id, Class<T> clazz, String databasePrefix, String tablePrefix) {
 		return generateDeleteSql(id, clazz, databasePrefix, tablePrefix, -1, -1);
 	}
 
@@ -204,15 +193,13 @@ public abstract class SqlUtil {
 		return generateSelectSql(name, value, clazz, null, null, -1, -1);
 	}
 
-	public static <T> SqlRunningBean generateSelectSql(String name,
-			Object value, Class<T> clazz, String databasePrefix) {
+	public static <T> SqlRunningBean generateSelectSql(String name, Object value, Class<T> clazz, String databasePrefix) {
 		return generateSelectSql(name, value, clazz, databasePrefix, null, -1,
 				-1);
 	}
 
 	public static <T> SqlRunningBean generateSelectSql(String name,
-			Object value, Class<T> clazz, String databasePrefix,
-			String tablePrefix) {
+			Object value, Class<T> clazz, String databasePrefix, String tablePrefix) {
 		return generateSelectSql(name, value, clazz, databasePrefix,
 				tablePrefix, -1, -1);
 	}
@@ -265,8 +252,7 @@ public abstract class SqlUtil {
 	}
 
 	public static <T> SqlRunningBean generateSearchSql(T bean,
-			String databasePrefix, String tablePrefix, int databaseIndex,
-			int tableIndex) {
+			String databasePrefix, String tablePrefix, int databaseIndex, int tableIndex) {
 		return generateSearchSql(bean, null, null, null, databasePrefix,
 				tablePrefix, databaseIndex, tableIndex);
 	}

@@ -135,11 +135,9 @@ public abstract class OrmUtil {
 
 			return bean;
 		} catch (Exception e) {
-			log.error("Fail to operator on ResultSet metadata for clazz {}.",
-					clazz);
+			log.error("Fail to operator on ResultSet metadata for clazz {}.", clazz);
 			log.error("Exception--->", e);
-			throw new IllegalStateException(
-					"Fail to operator on ResultSet metadata.", e);
+			throw new IllegalStateException("Fail to operator on ResultSet metadata.", e);
 		}
 	}
 }

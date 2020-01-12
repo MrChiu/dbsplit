@@ -1,5 +1,8 @@
-package com.robert.dbsplit.core;
+package com.robert.dbsplit.core.strategy;
 
+/**
+ * 分片策略
+ */
 public interface SplitStrategy {
 	public <K> int getNodeNo(K splitKey);
 

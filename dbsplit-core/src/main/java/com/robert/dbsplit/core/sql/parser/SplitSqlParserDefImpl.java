@@ -12,9 +12,11 @@ import com.alibaba.druid.sql.parser.Token;
 import com.robert.dbsplit.core.sql.parser.SplitSqlStructure.SqlType;
 import com.robert.dbsplit.excep.NotSupportedException;
 
+/**
+ * SQL解析
+ */
 public class SplitSqlParserDefImpl implements SplitSqlParser {
-	private static final Logger log = LoggerFactory
-			.getLogger(SplitSqlParserDefImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(SplitSqlParserDefImpl.class);
 
 	private static final int CACHE_SIZE = 1000;
 
@@ -25,6 +27,7 @@ public class SplitSqlParserDefImpl implements SplitSqlParser {
 		log.info("Default SplitSqlParserDefImpl is used.");
 	}
 
+	@Override
 	public SplitSqlStructure parseSplitSql(String sql) {
 		SplitSqlStructure splitSqlStructure = cache.get(sql);
 
@@ -112,8 +115,7 @@ public class SplitSqlParserDefImpl implements SplitSqlParser {
 		} while (true);
 
 		if (StringUtils.isEmpty(dbName) || StringUtils.isEmpty(tableName))
-			throw new NotSupportedException("The split sql is not supported: "
-					+ sql);
+			throw new NotSupportedException("The split sql is not supported: " + sql);
 
 		splitSqlStructure.setDbName(dbName);
 		splitSqlStructure.setTableName(tableName);

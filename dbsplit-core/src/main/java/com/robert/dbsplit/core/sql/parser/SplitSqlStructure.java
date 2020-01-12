@@ -60,8 +60,7 @@ public class SplitSqlStructure {
 				|| StringUtils.isEmpty(tableName)
 				|| StringUtils.isEmpty(previousPart)
 				|| StringUtils.isEmpty(sebsequentPart))
-			throw new IllegalStateException(
-					"The split SQL should be constructed after the SQL is parsed completely.");
+			throw new IllegalStateException("The split SQL should be constructed after the SQL is parsed completely.");
 
 		StringBuffer sb = new StringBuffer();
 		sb.append(previousPart).append(" ");

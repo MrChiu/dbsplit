@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import com.robert.dbsplit.core.strategy.SplitStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -29,8 +30,7 @@ import com.robert.dbsplit.core.sql.parser.SplitSqlStructure;
 import com.robert.dbsplit.excep.NotSupportedException;
 
 public class SplitJdbcTemplate implements SplitJdbcOperations {
-	protected static final Logger log = LoggerFactory
-			.getLogger(SplitJdbcTemplate.class);
+	protected static final Logger log = LoggerFactory.getLogger(SplitJdbcTemplate.class);
 
 	protected SplitTablesHolder splitTablesHolder;
 
@@ -43,18 +43,15 @@ public class SplitJdbcTemplate implements SplitJdbcOperations {
 	}
 
 	class SplitActionRunner {
-		<T, K> T runSplitAction(K splitKey, String sql,
-				SplitAction<T> splitAction) {
+		<T, K> T runSplitAction(K splitKey, String sql, SplitAction<T> splitAction) {
 			log.debug("runSplitAction entry, splitKey {} sql {}", splitKey, sql);
 
-			SplitSqlStructure splitSqlStructure = SplitSqlParser.INST
-					.parseSplitSql(sql);
+			SplitSqlStructure splitSqlStructure = SplitSqlParser.INST.parseSplitSql(sql);
 
 			String dbName = splitSqlStructure.getDbName();
 			String tableName = splitSqlStructure.getTableName();
 
-			SplitTable splitTable = splitTablesHolder.searchSplitTable(dbName,
-					tableName);
+			SplitTable splitTable = splitTablesHolder.searchSplitTable(dbName, tableName);
 
 			SplitStrategy splitStrategy = splitTable.getSplitStrategy();
 
@@ -69,13 +66,11 @@ public class SplitJdbcTemplate implements SplitJdbcOperations {
 
 			sql = splitSqlStructure.getSplitSql(dbNo, tableNo);
 
-			log.debug(
-					"runSplitAction do action, splitKey {} sql {} dbName {} tableName {} nodeNo {} dbNo {} tableNo {}",
+			log.debug("runSplitAction do action, splitKey {} sql {} dbName {} tableName {} nodeNo {} dbNo {} tableNo {}",
 					splitKey, sql, dbName, tableName, nodeNo, dbNo, tableNo);
 			T result = splitAction.doSplitAction(jt, sql);
 
-			log.debug(
-					"runSplitAction return, {} are returned, splitKey {} sql {}",
+			log.debug("runSplitAction return, {} are returned, splitKey {} sql {}",
 					result, splitKey, sql);
 			return result;
 		}

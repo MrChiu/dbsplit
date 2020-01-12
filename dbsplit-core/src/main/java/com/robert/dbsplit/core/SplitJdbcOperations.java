@@ -21,6 +21,9 @@ import org.springframework.jdbc.core.StatementCallback;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
+/**
+ * 分片JDBC操作，支持SQL
+ */
 public interface SplitJdbcOperations {
 	public <T, K> T execute(K splitKey, ConnectionCallback<T> action)
 			throws DataAccessException;

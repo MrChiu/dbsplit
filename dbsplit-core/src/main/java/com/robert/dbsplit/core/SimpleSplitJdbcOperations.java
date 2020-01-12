@@ -2,6 +2,9 @@ package com.robert.dbsplit.core;
 
 import java.util.List;
 
+/**
+ * 简单分片JDBC操作，直接操作对象，不需要SQL
+ */
 public interface SimpleSplitJdbcOperations extends SplitJdbcOperations {
 
 	public <K, T> void insert(K splitKey, T bean);
